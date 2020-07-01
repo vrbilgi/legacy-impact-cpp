@@ -1,9 +1,7 @@
 import os
 from Class import *
 from Comments import *
-c = classname()
-multiliencomment=[]
-def mainloop(line):
+def mainloop(line,c):
     # print("FULL LINE = ",line)
     class_find = 0 
     multiline_c = 0
@@ -21,7 +19,7 @@ def mainloop(line):
         # print("open_semicolon=",open_semicolon)
         # print("open_brases=",open_brases)
         # print("line=",line[class_find:open_brases])
-        # print("line",line[class_find:open_semicolon])
+        # # print("line",line[class_find:open_semicolon])
 
         if open_semicolon > open_brases:
             if open_brases!=-1:
@@ -82,22 +80,23 @@ def readFile(newfile):
         import sys
         sys.exit()
 
-def readFolder(foldername):
+def readFolder(foldername,class_name):
     print("readfoldername",foldername)
     for root, dirs, files in os.walk(foldername, topdown = False):
         for name in files:
             if name[-3:]=="cpp" or name[-3:] =="hpp":
                 print(os.path.join(root, name))
                 line = readFile(os.path.join(root, name))
-                mainloop(line)
+                mainloop(line,class_name)
 def main():
     # readFolder("/Users/vrbilgi/Documents/Schedule/SKD/src/command/publication")
-    readFolder("/Users/vrbilgi/Project/FindClass/src/TestFiles")
+    class_name = classname()
+    readFolder("/Users/vrbilgi/Project/FindClass/src/TestFiles",class_name)
+    print("=============")
+    print(class_name)
+    print("=============")
+ 
+
 if __name__ == '__main__':
     main()
-    print("=============")
-    print(c)
-    print("=============")
-
-   
-#include <iostream>using namespace std;class Shape2 {   public:      void setWidth2(int w) {         width2 = w;      }      void setHeight2(int h) {         height2 = h;      }   protected:      int width2;      int height2;};class Shape {   public:      void setWidth(int w) {         width = w;      }      void setHeight(int h) {         height = h;      }   protected:      int width;      int height;};class Rectangle: public Shape {   public:      int getArea() {         return (width * height);      }};
+  
